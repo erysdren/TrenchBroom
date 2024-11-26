@@ -1,3 +1,6 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/Microsoft/vcpkg.git
+[submodule "sourcepp"]
+	path = sourcepp
+	url = https://github.com/craftablescience/sourcepp/
