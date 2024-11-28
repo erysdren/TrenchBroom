@@ -143,6 +143,9 @@ add_compile_definitions(QT_NO_DEPRECATED_WARNINGS=1)
 # The googletest target links to this
 find_package(Threads)
 
+# Add sourcepp
+add_subdirectory(sourcepp)
+
 # Populate version variables using git
 get_git_describe("${GIT_EXECUTABLE}" "${CMAKE_SOURCE_DIR}" GIT_DESCRIBE)
 get_app_version(GIT_DESCRIBE APP_VERSION_YEAR APP_VERSION_NUMBER)
