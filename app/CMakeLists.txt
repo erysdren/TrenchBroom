@@ -1,4 +1,4 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/GenerateManual.cmake)
+# include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/GenerateManual.cmake)
 
 set(APP_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(APP_RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources")
@@ -113,7 +113,7 @@ target_link_libraries(TrenchBroom common) # common already comes with all its de
 # Xcode "new build system" does't allow custom commands to be depended on by two unrelated targets
 # In this case, ${INDEX_OUTPUT_PATH} is depended on by TrenchBroom and GenerateManual
 # so we must make TrenchBroom depend on GenerateManual (see #3608)
-add_dependencies(TrenchBroom GenerateManual)
+# add_dependencies(TrenchBroom GenerateManual)
 set_compiler_config(TrenchBroom)
 
 set_target_properties(TrenchBroom PROPERTIES AUTORCC TRUE)
