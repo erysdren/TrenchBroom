@@ -248,22 +248,24 @@ if(WIN32 OR ${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD")
             COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCE_DEST_DIR}/stylesheets/"
             COMMAND ${CMAKE_COMMAND} -E copy_directory "${APP_RESOURCE_DIR}/stylesheets" "${APP_RESOURCE_DEST_DIR}/stylesheets")
 
-    # Copy manual files to resource directory
-    add_custom_command(TARGET TrenchBroom POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCE_DEST_DIR}/manual/"
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCE_DEST_DIR}/manual/images"
-            COMMAND ${CMAKE_COMMAND} -E copy "${INDEX_OUTPUT_PATH}" "${APP_RESOURCE_DEST_DIR}/manual/"
-            COMMAND ${CMAKE_COMMAND} -E copy "${DOC_MANUAL_SHORTCUTS_JS_TARGET_ABSOLUTE}" "${APP_RESOURCE_DEST_DIR}/manual/")
-
-    foreach(MANUAL_FILE ${DOC_MANUAL_TARGET_FILES_ABSOLUTE})
+    if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Haiku")
+        # Copy manual files to resource directory
         add_custom_command(TARGET TrenchBroom POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy ${MANUAL_FILE} "${APP_RESOURCE_DEST_DIR}/manual/")
-    endforeach(MANUAL_FILE)
+                COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCE_DEST_DIR}/manual/"
+                COMMAND ${CMAKE_COMMAND} -E make_directory "${APP_RESOURCE_DEST_DIR}/manual/images"
+                COMMAND ${CMAKE_COMMAND} -E copy "${INDEX_OUTPUT_PATH}" "${APP_RESOURCE_DEST_DIR}/manual/"
+                COMMAND ${CMAKE_COMMAND} -E copy "${DOC_MANUAL_SHORTCUTS_JS_TARGET_ABSOLUTE}" "${APP_RESOURCE_DEST_DIR}/manual/")
 
-    foreach(MANUAL_IMAGE_FILE ${DOC_MANUAL_TARGET_IMAGE_FILES_ABSOLUTE})
-        add_custom_command(TARGET TrenchBroom POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy ${MANUAL_IMAGE_FILE} "${APP_RESOURCE_DEST_DIR}/manual/images/")
-    endforeach(MANUAL_IMAGE_FILE)
+        foreach(MANUAL_FILE ${DOC_MANUAL_TARGET_FILES_ABSOLUTE})
+            add_custom_command(TARGET TrenchBroom POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy ${MANUAL_FILE} "${APP_RESOURCE_DEST_DIR}/manual/")
+        endforeach(MANUAL_FILE)
+
+        foreach(MANUAL_IMAGE_FILE ${DOC_MANUAL_TARGET_IMAGE_FILES_ABSOLUTE})
+            add_custom_command(TARGET TrenchBroom POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy ${MANUAL_IMAGE_FILE} "${APP_RESOURCE_DEST_DIR}/manual/images/")
+        endforeach(MANUAL_IMAGE_FILE)
+    endif()
 endif()
 
 # Common CPack configuration
