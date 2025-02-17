@@ -216,7 +216,7 @@ endif()
 # Set up the resources and DLLs for the executable
 set(APP_RESOURCE_DEST_DIR "$<TARGET_FILE_DIR:TrenchBroom>")
 
-if(WIN32 OR ${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD")
+if(WIN32 OR ${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|Haiku")
     # Copy button images to resources directory
     add_custom_command(TARGET TrenchBroom POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory "${APP_RESOURCE_DIR}/graphics/images" "${APP_RESOURCE_DEST_DIR}/images")
