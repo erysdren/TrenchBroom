@@ -104,7 +104,7 @@ find_package(freetype CONFIG REQUIRED)
 find_package(Catch2 CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(miniz CONFIG REQUIRED)
+# find_package(miniz CONFIG REQUIRED)
 find_package(tinyxml2 CONFIG REQUIRED)
 
 # Find Qt and OpenGL
