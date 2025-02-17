@@ -294,7 +294,7 @@ void StandardMapParser::parseObject(ParserStatus& status)
     expect(QuakeMapToken::String | QuakeMapToken::OParenthesis, token);
     if (token.hasType(QuakeMapToken::String))
     {
-      expect({BrushPrimitiveId, PatchId}, token);
+      expect(std::vector<std::string>{BrushPrimitiveId, PatchId}, token);
       if (token.data() == BrushPrimitiveId)
       {
         parseBrushPrimitive(status, startLocation);
