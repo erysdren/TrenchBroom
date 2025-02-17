@@ -145,7 +145,7 @@ void ShaderProgram::set(const std::string& name, const float value)
 void ShaderProgram::set(const std::string& name, const double value)
 {
   assert(checkActive());
-  glAssert(glUniform1d(findUniformLocation(name), value));
+  glAssert(glUniform1f(findUniformLocation(name), (float)value));
 }
 
 void ShaderProgram::set(const std::string& name, const vm::vec2f& value)
