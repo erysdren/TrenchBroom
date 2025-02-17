@@ -91,17 +91,6 @@ if(NOT GIT_FOUND)
   message(FATAL_ERROR "Could not find git")
 endif()
 
-# Find Pandoc
-if(NOT PANDOC_PATH)
-  find_program(PANDOC_PATH NAMES "pandoc" DOC "Pandoc program location")
-
-  if(PANDOC_PATH STREQUAL "PANDOC_PATH-NOTFOUND")
-    message(FATAL_ERROR "Could not find pandoc")
-  else()
-    message(STATUS "Found Pandoc: ${PANDOC_PATH}")
-  endif()
-endif()
-
 # Prevent overriding the parent project's compiler/linker
 # settings on Windows
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
