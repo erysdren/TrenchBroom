@@ -14,7 +14,8 @@ find_path(freetype_INCLUDE_DIR
   /usr/include/freetype2
   /usr/local/include
   /sw/include
-  /opt/local/include)
+  /opt/local/include
+  /boot/system/develop/headers/freetype2)
 find_library(freetype_LIBRARY
   NAMES FreeType freetype
   PATHS
@@ -23,7 +24,8 @@ find_library(freetype_LIBRARY
   /usr/local/lib64
   /usr/local/lib
   /sw/lib
-  /opt/local/lib)
+  /opt/local/lib
+  /boot/system/develop/lib)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(freetype
