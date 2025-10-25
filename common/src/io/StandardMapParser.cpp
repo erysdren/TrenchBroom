@@ -630,7 +630,7 @@ void StandardMapParser::parseSiNFace(ParserStatus& status)
 
     auto rhs = m_tokenizer.nextToken();
 
-    setKeyValue(lhs.data(), rhs.data());
+    attribs.setKeyValue(lhs.data(), rhs.data());
   }
 
   onStandardBrushFace(location, m_targetMapFormat, p1, p2, p3, attribs, status);

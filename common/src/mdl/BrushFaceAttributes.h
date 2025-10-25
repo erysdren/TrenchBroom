@@ -50,7 +50,7 @@ private:
   std::optional<int> m_surfaceContents;
   std::optional<int> m_surfaceFlags;
   std::optional<float> m_surfaceValue;
-  std::optional<std::unordered_map<std::string, std::string>> m_surfaceKeyValues;
+  std::unordered_map<std::string, std::string> m_surfaceKeyValues;
 
   std::optional<Color> m_color;
 

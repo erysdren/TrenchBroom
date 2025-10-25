@@ -252,14 +252,9 @@ bool BrushFaceAttributes::setColor(const std::optional<Color>& color)
   return false;
 }
 
-bool BrushFaceAttributes::setColor(const std::optional<Color>& color)
+bool BrushFaceAttributes::setKeyValue(const std::string& key, const std::string& value)
 {
-  if (color != m_color)
-  {
-    m_color = color;
-    return true;
-  }
-  return false;
+  return m_surfaceKeyValues.emplace(key, value).second;
 }
 
 } // namespace tb::mdl
