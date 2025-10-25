@@ -252,4 +252,14 @@ bool BrushFaceAttributes::setColor(const std::optional<Color>& color)
   return false;
 }
 
+bool BrushFaceAttributes::setColor(const std::optional<Color>& color)
+{
+  if (color != m_color)
+  {
+    m_color = color;
+    return true;
+  }
+  return false;
+}
+
 } // namespace tb::mdl

@@ -618,18 +618,19 @@ void StandardMapParser::parseSiNFace(ParserStatus& status)
   attribs.setYScale(parseFloat());
 
   // SiN extra info is optional
-  if (m_tokenizer.peekToken().hasType(QuakeMapToken::Number | QuakeMapToken::String))
+  while (m_tokenizer.peekToken().hasType(QuakeMapToken::Number | QuakeMapToken::String))
   {
-    attribs.setSurfaceContents(parseInteger());
-    attribs.setSurfaceFlags(parseInteger());
-    attribs.setSurfaceValue(parseFloat());
+    auto lhs = m_tokenizer.nextToken();
 
-    // Daikatana color triple is optional
-    if (m_tokenizer.peekToken().hasType(QuakeMapToken::Integer))
+    // TODO parse named flags
+    if (lhs.data()[0] == '+')
     {
-      // red, green, blue
-      attribs.setColor(Color{parseInteger(), parseInteger(), parseInteger()});
+      continue;
     }
+
+    auto rhs = m_tokenizer.nextToken();
+
+    setKeyValue(lhs.data(), rhs.data());
   }
 
   onStandardBrushFace(location, m_targetMapFormat, p1, p2, p3, attribs, status);

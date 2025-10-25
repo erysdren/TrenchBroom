@@ -28,6 +28,8 @@
 #include <optional>
 #include <string>
 #include <string_view>
+#include <unordered_map>
+#include <vector>
 
 namespace tb::mdl
 {
@@ -48,6 +50,7 @@ private:
   std::optional<int> m_surfaceContents;
   std::optional<int> m_surfaceFlags;
   std::optional<float> m_surfaceValue;
+  std::optional<std::unordered_map<std::string, std::string>> m_surfaceKeyValues;
 
   std::optional<Color> m_color;
 
@@ -101,6 +104,7 @@ public:
   bool setSurfaceFlags(const std::optional<int>& surfaceFlags);
   bool setSurfaceValue(const std::optional<float>& surfaceValue);
   bool setColor(const std::optional<Color>& color);
+  bool setKeyValue(const std::string& key, const std::string& value);
 };
 
 } // namespace tb::mdl
