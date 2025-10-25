@@ -73,6 +73,7 @@ set(COMMON_SOURCE
         ${COMMON_SOURCE_DIR}/io/ReadFreeImageTexture.cpp
         ${COMMON_SOURCE_DIR}/io/ReadM8Texture.cpp
         ${COMMON_SOURCE_DIR}/io/ReadMipTexture.cpp
+        ${COMMON_SOURCE_DIR}/io/ReadSwlTexture.cpp
         ${COMMON_SOURCE_DIR}/io/ReadWalTexture.cpp
         ${COMMON_SOURCE_DIR}/io/ResourceUtils.cpp
         ${COMMON_SOURCE_DIR}/io/SimpleParserStatus.cpp
@@ -589,6 +590,7 @@ set(COMMON_HEADER
         ${COMMON_SOURCE_DIR}/io/ReadFreeImageTexture.h
         ${COMMON_SOURCE_DIR}/io/ReadM8Texture.h
         ${COMMON_SOURCE_DIR}/io/ReadMipTexture.h
+        ${COMMON_SOURCE_DIR}/io/ReadSwlTexture.h
         ${COMMON_SOURCE_DIR}/io/ReadWalTexture.h
         ${COMMON_SOURCE_DIR}/io/ResourceUtils.h
         ${COMMON_SOURCE_DIR}/io/SimpleParserStatus.h

@@ -29,6 +29,7 @@
 #include "io/ReadFreeImageTexture.h"
 #include "io/ReadM8Texture.h"
 #include "io/ReadMipTexture.h"
+#include "io/ReadSwlTexture.h"
 #include "io/ReadWalTexture.h"
 #include "io/ResourceUtils.h"
 #include "io/TraversalMode.h"
@@ -299,6 +300,13 @@ Result<mdl::Texture> loadTexture(
         return fs.openFile(actualPath) | kdl::and_then([&](auto file) {
                  auto reader = file->reader().buffer();
                  return readWalTexture(reader, palette);
+               });
+      }
+      else if (extension == ".swl")
+      {
+        return fs.openFile(actualPath) | kdl::and_then([&](auto file) {
+                 auto reader = file->reader().buffer();
+                 return readSwlTexture(reader);
                });
       }
       else if (extension == ".m8")
