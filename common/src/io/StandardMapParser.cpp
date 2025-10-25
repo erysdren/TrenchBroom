@@ -452,6 +452,9 @@ void StandardMapParser::parseFace(ParserStatus& status, const bool primitive)
   case mdl::MapFormat::Daikatana:
     parseDaikatanaFace(status);
     break;
+  case mdl::MapFormat::SiN:
+    parseSiNFace(status);
+    break;
   case mdl::MapFormat::Valve:
     parseValveFace(status);
     break;
@@ -584,6 +587,38 @@ void StandardMapParser::parseDaikatanaFace(ParserStatus& status)
 
   // Daikatana extra info is optional
   if (m_tokenizer.peekToken().hasType(QuakeMapToken::Integer))
+  {
+    attribs.setSurfaceContents(parseInteger());
+    attribs.setSurfaceFlags(parseInteger());
+    attribs.setSurfaceValue(parseFloat());
+
+    // Daikatana color triple is optional
+    if (m_tokenizer.peekToken().hasType(QuakeMapToken::Integer))
+    {
+      // red, green, blue
+      attribs.setColor(Color{parseInteger(), parseInteger(), parseInteger()});
+    }
+  }
+
+  onStandardBrushFace(location, m_targetMapFormat, p1, p2, p3, attribs, status);
+}
+
+void StandardMapParser::parseSiNFace(ParserStatus& status)
+{
+  const auto location = m_tokenizer.location();
+
+  const auto [p1, p2, p3] = parseFacePoints(status);
+  const auto materialName = parseMaterialName(status);
+
+  auto attribs = mdl::BrushFaceAttributes{materialName};
+  attribs.setXOffset(parseFloat());
+  attribs.setYOffset(parseFloat());
+  attribs.setRotation(parseFloat());
+  attribs.setXScale(parseFloat());
+  attribs.setYScale(parseFloat());
+
+  // SiN extra info is optional
+  if (m_tokenizer.peekToken().hasType(QuakeMapToken::Number | QuakeMapToken::String))
   {
     attribs.setSurfaceContents(parseInteger());
     attribs.setSurfaceFlags(parseInteger());

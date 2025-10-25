@@ -58,6 +58,10 @@ enum class MapFormat
    */
   Daikatana,
   /**
+   * SiN map format.
+   */
+  SiN,
+  /**
    * Quake 3 legacy format (like Quake 2, no brush primitives)
    */
   Quake3_Legacy,

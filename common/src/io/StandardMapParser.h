@@ -134,6 +134,7 @@ private:
   void parseQuake2ValveFace(ParserStatus& status);
   void parseHexen2Face(ParserStatus& status);
   void parseDaikatanaFace(ParserStatus& status);
+  void parseSiNFace(ParserStatus& status);
   void parseValveFace(ParserStatus& status);
   void parsePrimitiveFace(ParserStatus& status);
 

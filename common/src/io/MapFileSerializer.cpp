@@ -241,6 +241,44 @@ protected:
   }
 };
 
+class SiNFileSerializer : public Quake2FileSerializer
+{
+public:
+  explicit SiNFileSerializer(std::ostream& stream)
+    : Quake2FileSerializer{stream}
+  {
+  }
+
+private:
+  void doWriteBrushFace(std::ostream& stream, const mdl::BrushFace& face) const override
+  {
+    writeFacePoints(stream, face);
+    writeMaterialInfo(stream, face);
+
+    if (face.attributes().hasSurfaceAttributes() || face.attributes().hasColor())
+    {
+      writeSurfaceAttributes(stream, face);
+    }
+    if (face.attributes().hasColor())
+    {
+      writeSurfaceColor(stream, face);
+    }
+
+    fmt::format_to(std::ostreambuf_iterator<char>{stream}, "\n");
+  }
+
+protected:
+  void writeSurfaceColor(std::ostream& stream, const mdl::BrushFace& face) const
+  {
+    fmt::format_to(
+      std::ostreambuf_iterator<char>{stream},
+      " {} {} {}",
+      static_cast<int>(face.resolvedColor().r()),
+      static_cast<int>(face.resolvedColor().g()),
+      static_cast<int>(face.resolvedColor().b()));
+  }
+};
+
 class Hexen2FileSerializer : public QuakeFileSerializer
 {
 public:
@@ -293,6 +331,8 @@ std::unique_ptr<NodeSerializer> MapFileSerializer::create(
     return std::make_unique<Quake2ValveFileSerializer>(stream);
   case mdl::MapFormat::Daikatana:
     return std::make_unique<DaikatanaFileSerializer>(stream);
+  case mdl::MapFormat::SiN:
+    return std::make_unique<SiNFileSerializer>(stream);
   case mdl::MapFormat::Valve:
     return std::make_unique<ValveFileSerializer>(stream);
   case mdl::MapFormat::Hexen2:
