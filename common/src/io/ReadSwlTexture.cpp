@@ -81,7 +81,7 @@ Result<mdl::Texture> readSwlTexture(Reader& reader)
     reader.seekForward(4); // color[1]
     reader.seekForward(4); // color[2]
 
-    return mdl::loadPalette(paletteReader, mdl::PaletteColorFormat::Rgba)
+    return mdl::loadPalette(paletteReader, mdl::PaletteColorFormat::Rgbx)
            | kdl::transform([&](const auto& palette) {
                auto mip0AverageColor = Color{};
                auto buffers = mdl::TextureBufferList{};

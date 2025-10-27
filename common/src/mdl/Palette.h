@@ -64,6 +64,7 @@ enum class PaletteColorFormat
 {
   Rgb,
   Rgba,
+  Rgbx,
 };
 
 std::ostream& operator<<(std::ostream& lhs, PaletteColorFormat rhs);
