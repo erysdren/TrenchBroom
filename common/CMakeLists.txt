@@ -77,6 +77,7 @@ set(COMMON_SOURCE
         ${COMMON_SOURCE_DIR}/io/ReadWalTexture.cpp
         ${COMMON_SOURCE_DIR}/io/ResourceUtils.cpp
         ${COMMON_SOURCE_DIR}/io/SimpleParserStatus.cpp
+        ${COMMON_SOURCE_DIR}/io/SiNPakFileSystem.cpp
         ${COMMON_SOURCE_DIR}/io/SkinLoader.cpp
         ${COMMON_SOURCE_DIR}/io/SprLoader.cpp
         ${COMMON_SOURCE_DIR}/io/StandardMapParser.cpp
@@ -594,6 +595,7 @@ set(COMMON_HEADER
         ${COMMON_SOURCE_DIR}/io/ReadWalTexture.h
         ${COMMON_SOURCE_DIR}/io/ResourceUtils.h
         ${COMMON_SOURCE_DIR}/io/SimpleParserStatus.h
+        ${COMMON_SOURCE_DIR}/io/SiNPakFileSystem.h
         ${COMMON_SOURCE_DIR}/io/SkinLoader.h
         ${COMMON_SOURCE_DIR}/io/SprLoader.h
         ${COMMON_SOURCE_DIR}/io/StandardMapParser.h

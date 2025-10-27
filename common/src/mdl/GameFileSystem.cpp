@@ -24,6 +24,7 @@
 #include "io/DiskIO.h"
 #include "io/DkPakFileSystem.h"
 #include "io/IdPakFileSystem.h"
+#include "io/SiNPakFileSystem.h"
 #include "io/PathInfo.h"
 #include "io/SystemPaths.h"
 #include "io/TraversalMode.h"
@@ -143,6 +144,13 @@ Result<std::unique_ptr<io::FileSystem>> createImageFileSystem(
   {
     return io::Disk::openFile(path) | kdl::and_then([&](auto file) {
              return io::createImageFileSystem<io::DkPakFileSystem>(std::move(file));
+           })
+           | kdl::transform(setMetadataAndCast);
+  }
+  else if (kdl::ci::str_is_equal(packageFormat, "sinpak"))
+  {
+    return io::Disk::openFile(path) | kdl::and_then([&](auto file) {
+             return io::createImageFileSystem<io::SiNPakFileSystem>(std::move(file));
            })
            | kdl::transform(setMetadataAndCast);
   }
