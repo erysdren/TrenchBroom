@@ -51,7 +51,7 @@ Result<mdl::Texture> readSwlTexture(Reader& reader)
     auto paletteReader = reader.subReaderFromCurrent(SwlLayout::PaletteSize);
     reader.seekForward(SwlLayout::PaletteSize);
 
-    reader.seekForward(2); // palcrc
+    reader.seekForward(4); // palcrc
 
     auto offsets = std::vector<size_t>{}; // offsets from the beginning of the file
 
@@ -81,24 +81,14 @@ Result<mdl::Texture> readSwlTexture(Reader& reader)
     reader.seekForward(4); // color[1]
     reader.seekForward(4); // color[2]
 
-#if 0
-    return mdl::loadPalette(paletteReader, mdl::PaletteColorFormat::Rgb)
+    return mdl::loadPalette(paletteReader, mdl::PaletteColorFormat::Rgba)
            | kdl::transform([&](const auto& palette) {
-               reader.seekForward(4); // flags
-               reader.seekForward(4); // contents
-               reader.seekForward(4); // value
-
                auto mip0AverageColor = Color{};
                auto buffers = mdl::TextureBufferList{};
                for (size_t mipLevel = 0; mipLevel < SwlLayout::MipLevels; ++mipLevel)
                {
-                 const auto w = widths[mipLevel];
-                 const auto h = heights[mipLevel];
-
-                 if (w == 0 || h == 0)
-                 {
-                   break;
-                 }
+                 const auto w = width / (size_t(1) << mipLevel);
+                 const auto h = height / (size_t(1) << mipLevel);
 
                  reader.seekFromBegin(offsets[mipLevel]);
 
@@ -120,15 +110,14 @@ Result<mdl::Texture> readSwlTexture(Reader& reader)
                }
 
                return mdl::Texture{
-                 widths[0],
-                 heights[0],
+                 width,
+                 height,
                  mip0AverageColor,
                  GL_RGBA,
                  mdl::TextureMask::Off,
                  mdl::NoEmbeddedDefaults{},
                  std::move(buffers)};
              });
-#endif
   }
   catch (const ReaderException& e)
   {

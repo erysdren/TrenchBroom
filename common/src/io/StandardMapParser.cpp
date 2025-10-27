@@ -618,9 +618,13 @@ void StandardMapParser::parseSiNFace(ParserStatus& status)
   attribs.setYScale(parseFloat());
 
   // SiN extra info is optional
+  m_tokenizer.setSkipEol(false);
   while (m_tokenizer.peekToken().hasType(QuakeMapToken::Number | QuakeMapToken::String))
   {
     auto lhs = m_tokenizer.nextToken();
+
+    if (lhs.hasType(QuakeMapToken::Eol))
+      break;
 
     // TODO parse named flags
     if (lhs.data()[0] == '+')
@@ -632,6 +636,7 @@ void StandardMapParser::parseSiNFace(ParserStatus& status)
 
     attribs.setKeyValue(lhs.data(), rhs.data());
   }
+  m_tokenizer.setSkipEol(true);
 
   onStandardBrushFace(location, m_targetMapFormat, p1, p2, p3, attribs, status);
 }
