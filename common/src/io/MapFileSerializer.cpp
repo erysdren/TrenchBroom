@@ -255,27 +255,30 @@ private:
     writeFacePoints(stream, face);
     writeMaterialInfo(stream, face);
 
-    if (face.attributes().hasSurfaceAttributes() || face.attributes().hasColor())
+    if (face.attributes().hasSurfaceAttributes())
     {
       writeSurfaceAttributes(stream, face);
     }
-    if (face.attributes().hasColor())
+
+    if (face.attributes().hasKeyValues())
     {
-      writeSurfaceColor(stream, face);
+      writeSurfaceKeyValues(stream, face);
     }
 
     fmt::format_to(std::ostreambuf_iterator<char>{stream}, "\n");
   }
 
 protected:
-  void writeSurfaceColor(std::ostream& stream, const mdl::BrushFace& face) const
+  void writeSurfaceKeyValues(std::ostream& stream, const mdl::BrushFace& face) const
   {
-    fmt::format_to(
-      std::ostreambuf_iterator<char>{stream},
-      " {} {} {}",
-      static_cast<int>(face.resolvedColor().r()),
-      static_cast<int>(face.resolvedColor().g()),
-      static_cast<int>(face.resolvedColor().b()));
+    for (const auto & [ key, value ] : face.attributes().keyValues())
+    {
+      fmt::format_to(
+        std::ostreambuf_iterator<char>{stream},
+        " {} {}",
+        key,
+        value);
+    }
   }
 };
 

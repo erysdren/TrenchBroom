@@ -90,6 +90,9 @@ public:
   bool hasColor() const;
   const std::optional<Color>& color() const;
 
+  bool hasKeyValues() const;
+  const std::unordered_map<std::string, std::string>& keyValues() const;
+
   bool valid() const;
 
   bool setMaterialName(const std::string& materialName);

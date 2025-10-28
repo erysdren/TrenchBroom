@@ -126,6 +126,16 @@ const std::optional<Color>& BrushFaceAttributes::color() const
   return m_color;
 }
 
+bool BrushFaceAttributes::hasKeyValues() const
+{
+  return !m_surfaceKeyValues.empty();
+}
+
+const std::unordered_map<std::string, std::string>& BrushFaceAttributes::keyValues() const
+{
+  return m_surfaceKeyValues;
+}
+
 bool BrushFaceAttributes::valid() const
 {
   return !vm::is_zero(m_scale.x(), vm::Cf::almost_zero())
